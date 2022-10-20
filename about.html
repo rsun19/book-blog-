@@ -1,0 +1,10 @@
+{% extends "template.html" %}
+{% block content %}
+    <div id="form" class="centered">
+        <h1 class="centerednospace">About Me</h1>
+        <img id="imgsize" src="{{ url_for('static', filename='aboutme.jpg') }}">
+        <p class="para">Hi! I'm Robert Sun, a rising second year at the University of Virginia, and I am maintaining this website for fun! In my free time, I love reading (obviously), running, coding, volunteering at the firehouse, lifting, watching tv shows, and hanging out with friends.</p>
+        <h1 class="centerednospace">About This Website</h1>
+        <p class="para">This website was created using HTML, CSS, JavaScript, and Python (backend), using Flask as the framework.</p>
+    </div>
+{% endblock content %}

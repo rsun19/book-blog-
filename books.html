@@ -1,0 +1,18 @@
+{% extends 'template.html' %}
+{% block content %}
+    <div class= "coverpage">
+        <h1>Scroll for a list of Book Reviews</h1>
+    </div>
+    <div id="moveddown">
+        {% for author in sorted_author_list %}
+            <h3>{{ author }}</h3>
+            {% for books in book_dict[author] %}
+                {% if author in author_more %}
+                    <div><a href = "{{ books[1] }}" style="text-decoration: underline !important; margin-bottom: 20px; display: block; width: max-content;">{{ books[0] }}</a></div>
+                {% else %}
+                    <div><a href = "{{ books[1] }}" style="text-decoration: underline !important; margin-bottom: 20px;">{{ books[0] }}</a></div>
+                {% endif %}
+            {% endfor %}  
+        {% endfor %}
+    </div>
+{% endblock content %}
