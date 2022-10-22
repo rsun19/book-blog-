@@ -13,9 +13,8 @@ import os
 
 BASE = "https://robertsrandomreviews.com/"
 
+#SECRET INFO REDACTED, need it for Google Auth!!
 
-
-master_email = 'robertssun1234@gmail.com'
 login_manager = LoginManager(app)
 login_manager.init_app(app)
 api = Api(app)
@@ -90,11 +89,6 @@ class Comment_(Resource):
         return make_response(render_template("viewcomment.html", title=title, comment=comment))
 
     def post(self, comment_id):
-        # form = CommentForm()
-        # if form.validate_on_submit():
-        #     comment = Comment(title=form.title.data, content=form.content.data, author=current_user)
-        #     db.session.add(comment)
-        #     db.session.commit()
         args = comment_put_args.parse_args()
         comment = Comment.query.filter_by(id=comment_id).first()
         comment.title = args["title"]
@@ -236,10 +230,11 @@ def save_picture(form_picture):
     form_picture.save(picture_path)
     return form_picture.filename
 
-@app.route("/post/<int:post_id>/delete", methods=['POST'])
+@app.route("/post/<int:post_id>/delete", methods=['GET','POST'])
 @login_required
 def delete_post(post_id):
-    post = Comment.query.get_or_404(post_id)
+    if request.method == 'GET':
+        post = Comment.query.get_or_404(post_id)
     if post.author != current_user:
         abort(403)
     db.session.delete(post)
@@ -251,7 +246,7 @@ def delete_post(post_id):
 def delete_comment(comment_id):
     if request.method == 'GET':
         comment = Comment.query.get_or_404(comment_id)
-    if comment.author != current_user and current_user.email != 'robertssun1234@gmail.com':
+    if comment.author != current_user:
          abort(403)
     db.session.delete(comment)
     db.session.commit()
