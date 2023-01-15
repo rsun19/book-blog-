@@ -111,6 +111,12 @@ a:hover, a:active {
     flex-direction: column;
     row-gap: 15px;
   }
+  .projectalign {
+    flex-direction: column !important;
+    row-gap: 15px;
+    width: 100% !important;
+    margin-left: 0% !important;
+  }
   .homeHeader {
     flex-direction: column;
     row-gap: 15px;
@@ -119,6 +125,9 @@ a:hover, a:active {
   .para {
     padding-left: 0;  
     width: 100%;  
+  }
+  .paraProjects {
+    margin-left: 0 !important;
   }
   .imgsize {
     width: 100%;
@@ -157,6 +166,9 @@ a:hover, a:active {
     margin-top: 215px;
   }
   .coverpage {
+    margin-top: 215px !important;
+  }
+  .portfoliopage {
     margin-top: 215px !important;
   }
 }
@@ -206,6 +218,12 @@ a:hover, a:active {
   .coverpage {
     margin-top: 215px !important;
   }
+  .portfoliopage {
+    margin-top: 215px !important;
+    /* background-image: url('/static/IMG_0464.jpg') !important;
+    object-fit:fill !important;
+    background-repeat: no-repeat; */
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -251,6 +269,9 @@ a:hover, a:active {
     margin-top: 215px;
   }
   .coverpage {
+    margin-top: 215px !important;
+  }
+  .portfoliopage {
     margin-top: 215px !important;
   }
   /* .commentview {
@@ -302,6 +323,49 @@ a:hover, a:active {
   padding: 15%;
   margin-top: 50px;
 }
+
+.portfoliopage {
+  background-image: url('/static/IMG_0417.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  /*background-color: turquoise;*/
+  padding: 15%;
+  margin-top: 50px;
+}
+
+.portfoliobutton {
+  background-color: white;
+  padding: 15px;
+  color: black;
+}
+
+.projectbox {
+  border: 5px dotted black;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+}
+
+.projectalign {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-direction: row;
+  font-size: 15px;
+  column-gap: 25px;
+  padding: 5px 0px;
+  width: 50%;
+  text-align: center;
+  margin-left: 25%;
+}
+
+.enclosedimage {
+  padding-top: 10%;
+  padding-bottom: 5%;
+}
+
 #para1 {
   display: flex;
   justify-content: center;
@@ -314,6 +378,13 @@ a:hover, a:active {
   white-space: pre-wrap;
   overflow-wrap: break-word;
  }
+
+.paraProjects {
+  text-align: left;
+  font-size: 20px;
+  color: black;
+  margin-left: 25%;
+}
 
 p.startingpara {
   text-align: left;

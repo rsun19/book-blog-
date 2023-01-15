@@ -1,10 +1,60 @@
 {% extends "template.html" %}
 {% block content %}
-    <div id="form" class="centered">
-        <h1 class="centerednospace">About Me</h1>
-        <img id="imgsize" src="{{ url_for('static', filename='aboutme.jpg') }}">
-        <p class="para">Hi! I'm Robert Sun, a rising second year at the University of Virginia, and I am maintaining this website for fun! In my free time, I love reading (obviously), running, coding, volunteering at the firehouse, lifting, watching tv shows, and hanging out with friends.</p>
-        <h1 class="centerednospace">About This Website</h1>
-        <p class="para">This website was created using HTML, CSS, JavaScript, and Python (backend), using Flask as the framework.</p>
+<div class= "portfoliopage">
+    <h1 class="enclosedimage">Robert Sun</h1>
+    <a href="https://github.com/rsun19" target="_blank" class="portfoliobutton">Check out my Github</a>
+</div>
+    <h1 class="centerednospace">About Me</h1>
+    <p class="para">Hi! I'm Robert Sun, a second year at the University of Virginia. In my free time, I love programming, reading, volunteering at the firehouse, lifting, watching tv shows, and hanging out with friends.</p>
+    <div style="text-align: center; text-decoration: underline;">
+        <a href="https://docs.google.com/document/d/1xIxCOk0GNFJ-5rsPaYgbL90n1iOf3J7O6YzK6uhAuu4/edit" target="_blank" class="portfoliobutton">View CV</a>
     </div>
+    <h1 class="centerednospace">Projects</h1>
+    <div class="projectalign">
+        <div class="projectbox">
+            <h3>Mobile App Development with Flutter</h3>
+            <p style="padding-bottom: 15px;">Developed a mobile app that allows people to create trip itinenaries, view them on maps, and share them with people.
+                Users can use direction-by-direction navigation as an alternative to Google maps using Open Street Maps API and Open 
+                Route Service API. The application also has two databases: one stored locally using SQLite, and another stored online 
+                using Firebase. By doing this, users can log-in using Google Sign In services, and share trip itineraries with other. 
+                Flutter uses Dart as its language. Some screenshots can be found by clicking the "View source code" link and navigating 
+            to the README file.
+        </p>
+            <a href="https://github.com/rsun19/Trip-Planner-App" target="_blank" class="portfoliobutton" style="text-decoration: underline;">View source code</a>
+        </div>
+        <div class="projectbox">
+            <h3>Web Development with Flask</h3>
+            <p style="padding-bottom: 15px;">Developed a book blog using Flask, with Python as its back end and HTML, CSS, and JavaScript for the front end. 
+                The blog posts I create go directly towards a database, and users can use their Google Account to log in and create 
+                comments. This is done with the help of REST-API endpoints, which helps me create posts and manage comments with ease. 
+                To view this website, press the "Home" button on the navigation bar.
+            </p>
+            <a href="https://github.com/rsun19/book-blog-" target="_blank" class="portfoliobutton" style="text-decoration: underline;">View source code</a>
+        </div>
+    </div>
+    <div>
+        <h1 class="centerednospace">Classes Taken</h1>
+        <div class="paraProjects">
+            <p>Computer Science courses taking this semester</p>
+            <ul>
+                <li>CS 3140: Software Development Essentials</li>
+                <li>CS 2130: Computer Systems and Organization</li>
+            </ul>
+            <p>Computer Science courses already taken this semester</p>
+            <ul>
+                <li>CS 2100: Data Structures and Algorithms</li>
+                <li>CS 2120: Discrete Mathematics</li>
+                <li>CS 1110: Introduction to Programming</li>
+            </ul>
+            <p>Math/Stat Courses Taking/Taken</p>
+            <ul>
+                <li>STAT 3100: Foundation of Statistics (Probability and Linear Algebra)</li>
+                <li>MATH 1220: Calculus 2</li>
+                <li>STAT 2120: Introduction to Statistical Analysis</li>
+                <li>MATH 1210: Calculus 1</li>
+            </ul>
+        </div>
+    </div>
+    <h1 class="centerednospace">About This Website</h1>
+    <p class="para">This website was created using HTML, CSS, JavaScript, and Python (backend), using Flask as the framework.</p>
 {% endblock content %}
