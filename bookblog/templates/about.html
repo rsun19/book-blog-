@@ -1,0 +1,82 @@
+{% extends "template.html" %}
+{% block content %}
+<body>
+    <div class= "portfoliopage">
+        <h1 class="enclosedimage", style="font-size: 25px; font-weight: bold; padding-bottom: 50px;">Robert Sun</h1>
+        <a href="https://rsun19.github.io/portfoliodev/" target="_blank" class="portfoliobutton">Portfolio Website</a>
+    </div>
+    <div style="margin-left: 40px; margin-right: 40px; margin-top: 40px">  
+        <div class="w-full rounded overflow-hidden shadow-lg border">
+            <div style="padding: 40px;">
+                <div class="font-bold text-xl mb-2" style="padding-bottom: 20px; font-size: 25px;">Connect with me!</div>
+                <p class="text-gray-700 text-base">
+                    Hi! I'm Robert Sun, a rising third-year Computer Science student at the University of Virginia. In my free time, I love programming, salsa dancing, reading, volunteering at the firehouse, lifting, watching tv shows, and hanging out with friends.
+                </p>
+                <div class="pt-5 pb-1" style="padding-top: 25px">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        <a href="https://www.linkedin.com/in/rob-sun/" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">LinkedIn</a>
+                    </span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        <a href="https://github.com/rsun19" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">GitHub</a>
+                    </span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        <a href="https://docs.google.com/document/d/1xIxCOk0GNFJ-5rsPaYgbL90n1iOf3J7O6YzK6uhAuu4/edit" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">View CV</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1 class="centerednospace" style="font-size: 25px; margin: 20px 0 20px 0;">Projects</h1>
+    <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; margin: 0 40px 40px 40px;">
+        <div style= "margin-left: 0px; margin-right: 0px;">  
+            <div class="w-full rounded overflow-hidden shadow-lg border">
+                <div style="padding: 40px;">
+                    <div class="font-bold text-xl mb-2" style="padding-bottom: 20px; font-size: 25px;">Mobile App Development with Flutter</div>
+                    <p class="text-gray-700 text-base">
+                        Developed a mobile app that allows people to create trip itinenaries, view them on maps, and share them with people. Users can create trip itineraries using Chat GPT, share them with their friends, and download itineraries from other users. Users can also view NYC real-time subway arrivals thanks to the GTFS-rt data given by MTA's API. Users can use direction-by-direction navigation as an alternative to Google maps using Open Street Maps API and Open Route Service API. The application also has two databases: one stored locally using SQLite, and another stored online using Firebase. By doing this, users can log-in using Google Sign In services, and share trip itineraries with others. Warning: The GitHub repo is not updated because I use a private repo currently. The code and organization is not representative of the current state of the app. I recently made large-scale UI changes, many bug fixes, and implemented a caching system, which is not reflected anywhere yet.
+                    </p>
+                    <div class="pt-5 pb-1" style="padding-top: 25px">
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                            <a href="https://testflight.apple.com/join/f5PW402r" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">Beta test app</a>
+                        </span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                            <a href="https://github.com/rsun19/Trip-Planner-App" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">View source code</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style= "margin-left: 0px; margin-right: 0px;">  
+            <div class="w-full rounded overflow-hidden shadow-lg border">
+                <div style="padding: 40px;">
+                    <div class="font-bold text-xl mb-2" style="padding-bottom: 20px; font-size: 25px;">PyTorch</div>
+                        <p class="text-gray-700 text-base">
+                            Developed a model using PyTorch that can classify recyclable items. You can take a picture, and upload it to the website to see if it is recyclable or not. I trained ResNet18's pre-trained model with thousands of images and the model is 84% accurate on the testing data. The classifications are metal, glass, plastic, paper, cardboard, and trash.
+                        </p>
+                    <div class="pt-5 pb-1" style="padding-top: 25px">
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                            <a href="https://www.recycleai.tech" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">View website</a>
+                        </span>
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                            <a href="https://github.com/rsun19/RecycleImageClassifier_dev" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">View source code</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style= "margin-left: 0px; margin-right: 0px;">  
+            <div class="w-full rounded overflow-hidden shadow-lg border">
+                <div style="padding: 40px;">
+                    <div class="font-bold text-xl mb-2" style="padding-bottom: 20px; font-size: 25px;">Book Blog with Flask</div>
+                    <p class="text-gray-700 text-base">
+                        Developed a book blog using Flask, with Python as its backend and HTML, CSS, and JavaScript for the front end. The blog posts I create go directly towards a database, and users can use their Google Account to log in and create comments.                            </p>
+                    <div class="pt-5 pb-1" style="padding-top: 25px">
+                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                            <a href="https://github.com/rsun19/book-blog-" target="_blank" style="padding: 20px 20px; color: black; text-decoration: none;">View source code</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+{% endblock content %}

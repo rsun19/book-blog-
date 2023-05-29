@@ -1,0 +1,80 @@
+{% extends 'template.html' %}
+{% block content %}
+    <h1 class="centered" style="font-size: 40px; font-weight: bold;">{{ book_title }}</h1>
+    <h2 class="centerednospace" style="font-size: 20px; font-weight: bold;">By:</h2>
+    <h1 class="centerednospace" style="font-size: 40px; font-weight: bold;">{{ author_name }}</h1>
+    <img style="max-height: 500px; width: auto; margin: 20px auto;" src="{{ image_file }}">
+    <h3 class="centerednospace" style="margin-bottom: 30px; font-weight: bold;">{{ rating }}</h3>
+    <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; margin-top: 0px; margin-bottom: 30px;">
+        <div class="marginCardStyling">  
+            <div class="w-full rounded overflow-hidden shadow-lg border">
+                <div style="padding: 40px;">
+                    <p class="text-gray-700 text-base" style="margin-bottom: 20px; word-break: break-word; white-space: pre-line;">
+                        {{ content_before }}
+                    </p>
+                    <h2 class="centerednospace" style="font-weight: bold; font-size: 40; margin: auto;">WARNING: CONTAINS SPOILERS!</h2>
+                    <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+                        <button onclick='spoiler()' class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" style="margin: auto; padding: 15px">
+                            Spoilers
+                        </button>
+                    </div>
+                    <div id="spoilers">
+                        <p class="text-gray-700 text-base" style="word-break: break-word; white-space: pre-line;">
+                            {{ content_after }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="centerednospace" style="margin-top: 25px;">WARNING: Comments are unmonitored. View at your own risk.</h2>
+    {% if current_user.is_authenticated %}
+    <div class="addcomment">
+        <a href="{{ comment_url }}" style="text-decoration:underline !important; margin-top: 25px; margin-bottom: 20px;">Click to add a comment!</a>
+    </div>
+    {% else %}
+        <h2 class="centerednospace" style="margin-top: 25px;">You must log in to make a comment</h2>
+    <div class="addcomment">
+        <a href="/googlelogin" style="text-decoration:underline !important; margin-top: 25px; margin-bottom: 20px;" class="addcomment">Click to login</a>
+    </div>
+    {% endif %}
+    <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 20px; margin-top: 0px; margin-bottom: 30px;">
+        {% for comment in comments %}
+        <div class="marginCardStyling" style="margin-bottom: 20px;">
+            <div class="w-full rounded overflow-hidden shadow-lg border">
+                <div style="padding: 10px; display: flex; flex-direction: row;">
+                    <div class="commentpic" style="margin-right: 10px;">
+                        <img src="{{ comment.author.image_file }}" alt="Google profile pic" style="min-width: 75px; width: 75px; max-width: 75px; height: auto;"></img>
+                    </div>
+                    <div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <p>{{ comment.author.username }}</p>
+                            </div>
+                            <div style="margin-left: 15px; flex-grow: 1;">
+                                <p>{{ comment.date_posted.strftime('%m-%d-%Y') }}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p style="font-weight: bold;">{{ comment.title }}</p>
+                        </div>
+                        <div>
+                            <p style="word-break: break-word; white-space: pre-line;">{{ comment.content }}</p>
+                        </div>
+                        <div style="display: flex; justify-content: start;">
+                            <div>
+                                {% if comment.author == current_user or current_user.email == master_email %}
+                                    <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" style="border: 1px solid black; border-radius: 10px; padding: 10px; background-color: white; margin-top: 10px; color: red;">
+                                        <input type="submit" style="cursor: pointer;" value="Delete Comment" />
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>  
+{% endblock content %}

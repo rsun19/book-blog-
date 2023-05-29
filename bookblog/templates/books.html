@@ -1,0 +1,42 @@
+{% extends 'template.html' %}
+{% block content %}
+    <div class="coverpage">
+        <h1 style="font-size: 25px; font-weight: bold; padding-top: 50px; padding-bottom: 50px;">Scroll for a list of Book Reviews</h1>
+    </div>
+    <div style="margin: 20px 30px 20px 30px;">
+        {% for author in sorted_author_list %}
+            <h3 style="font-size: 20px; margin-top: 20px; margin-bottom: 20px;">{{ author }}</h3>
+            <div class="authorBookFlex">
+            {% for books in book_dict[author] %}
+                {% if author in author_more %}
+                <a href = "{{ books[1] }}">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <div style="padding-bottom: 20px;">
+                            <div style="display: flex; justify-content: center;">
+                                <img style="max-height: 250px; width: auto" src="{{ books[2] }}" alt="Image of book">
+                            </div>
+                            <div style="padding-top: 20px; text-align: center; padding-left: 20px; padding-right: 20px;">
+                                <div class="text-xl mb-2">{{ books[0] }}</div>
+                            </div>
+                        </div>
+                    </div>        
+                </a>           
+                {% else %}
+                <a href = "{{ books[1] }}">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <div style="padding-bottom: 20px;">
+                            <div style="display: flex; justify-content: center;">
+                                <img style="max-height: 250px; width: auto" src="{{ books[2] }}" alt="Image of book">
+                            </div>
+                            <div style="padding-top: 20px; text-align: center; padding-left: 20px; padding-right: 20px;">
+                                <div class="text-xl mb-2">{{ books[0] }}</div>
+                            </div>
+                        </div>
+                    </div>        
+                </a>    
+                {% endif %}
+            {% endfor %}  
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

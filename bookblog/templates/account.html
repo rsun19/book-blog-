@@ -1,0 +1,68 @@
+{% extends 'template.html' %}
+{% block content %}
+    <h1 class="centered" style="font-weight: bold; font-size: 25px; margin-bottom: 20px;">Success! You are now Logged In! Here are your account details.</h1>
+    <div class="marginCardStyling">
+        <div class="w-full rounded overflow-hidden shadow-lg border">
+            <div style="padding: 10px; display: flex; flex-direction: row;">
+                <div class="commentpic" style="margin-right: 10px;">
+                    <img src="{{ profile_pic }}" alt="Google profile pic" style="min-width: 75px; width: 75px; max-width: 75px; height: auto;"></img>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div>
+                        <p>Name: {{ username  }}</p>
+                    </div>
+                    <div>
+                        <p>Email: {{ email }}</p>
+                    </div>
+                    <div>
+                        <a style="text-decoration:none;" href="/logout">Logout</a>
+                    </div>
+                    <div>
+                        <a style="text-decoration:none;" href="/home">Return to Home Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2 class="centerednospace" style="margin-bottom: 20px; font-weight: bold; font-size: 25px;">Comments:</h2>
+    <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 20px; margin-top: 0px; margin-bottom: 30px;">
+        {% for comment in comments %}
+        <div class="marginCardStyling" style="margin-bottom: 20px;">
+            <div class="w-full rounded overflow-hidden shadow-lg border">
+                <div style="padding: 10px; display: flex; flex-direction: row;">
+                    <div class="commentpic" style="margin-right: 10px;">
+                        <img src="{{ comment.author.image_file }}" alt="Google profile pic" style="min-width: 75px; width: 75px; max-width: 75px; height: auto;"></img>
+                    </div>
+                    <div>
+                        <div style="display: flex; flex-direction: row; justify-content: space-between;">
+                            <div>
+                                <p>{{ comment.author.username }}</p>
+                            </div>
+                            <div style="margin-left: 15px; flex-grow: 1;">
+                                <p>{{ comment.date_posted.strftime('%m-%d-%Y') }}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p style="font-weight: bold;">{{ comment.title }}</p>
+                        </div>
+                        <div>
+                            <p style="word-break: break-word; white-space: pre-line;">{{ comment.content }}</p>
+                        </div>
+                        <div style="display: flex; justify-content: start;">
+                            <div>
+                                {% if comment.author == current_user or current_user.email == master_email %}
+                                    <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" style="border: 1px solid black; border-radius: 10px; padding: 10px; background-color: white; margin-top: 10px; color: red;">
+                                        <input type="submit" style="cursor: pointer;" value="Delete Comment" />
+                                      </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>    
+{% endblock content %}
