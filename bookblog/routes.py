@@ -11,7 +11,7 @@ import requests
 from flask_wtf.file import FileField, FileAllowed
 import os
 
-BASE = "https://robertsrandomreviews.com/"
+BASE = "https://127.0.0.1:5000/"
 
 GOOGLE_CLIENT_ID = ""
 GOOGLE_CLIENT_SECRET = ""
