@@ -31,34 +31,54 @@ post_put_args.add_argument("rating", type=str, help="Book rating", required=True
 post_put_args.add_argument("rating_int", type=int, help="0", required=True)
 post_put_args.add_argument("content_before", type=str, help="Content before spoiler", required=True)
 post_put_args.add_argument("content_after", type=str, help="Content after spoiler", required=True)
+post_put_args.add_argument("image_file", type=str, help="Image file", required=True)
+
+class PostAPI(Resource):
+    def get(self, post_id):
+        #comment_list = []
+        post = Post.serializing(Post.query.get_or_404(post_id))
+        image_file = url_for('static', filename='posts/' + post["image_file"])
+        #comments = Comment.query.filter_by(comment_url=post_id)
+        post["image_file"] = image_file
+        return jsonify(post)    
+
+api.add_resource(PostAPI, "/api/post/<int:post_id>")
+
+class AllPosts(Resource):
+    def get(self):
+        posts = Post.query.all()
+        json_list = []
+        for post in posts:
+            post_details = Post.serializing(post)
+            image_file = url_for('static', filename='posts/' + post_details["image_file"])
+            post_details['image_file'] = image_file
+            json_list.append(post_details)
+        return jsonify(json_list)
+
+api.add_resource(AllPosts, "/api/post")
 
 class Post_(Resource):
     def get(self, post_id):
-        comment_url = "/post/" + str(post_id) + "/comment"
-        response = json.dumps(Post.serializing(Post.query.filter_by(id=post_id).first()))
-        post_details = json.loads(response)
-        title = post_details["author_name"]
-        author_name = post_details["author_name"]
-        content_after = post_details["content_after"]
-        content_before = post_details["content_before"]
-        rating=post_details["rating"]
-        book_title=post_details["title"]
-        post = Post.query.filter_by(id=post_id).first()
-        image_file = url_for('static', filename='posts/' + post.image_file)
+        url = BASE + "api/post/" + str(post_id)
+        response = requests.get(url, verify=False)
+        post_details = response.json()
+        # comment_url = BASE + "api/" + str(post_id) + "/comment"
+        # comment_response = requests.get(comment_url, verify=False)
+        # comments = comment_response.json()
         comments = Comment.query.filter_by(comment_url=post_id)
-        return make_response(render_template("post.html", image_file=image_file, comment_url=comment_url, title=title, author_name=author_name, content_after=content_after, content_before=content_before, rating=rating, book_title=book_title, comments=comments, master_email=master_email))
+        return make_response(render_template("post.html", post=post_details, comments=comments))
 
-    def put(self, post_id):
-        args = post_put_args.parse_args()
-        post = Post.query.filter_by(id=post_id).first()
-        post.title = args["title"]
-        post.author_name = args["author_name"]
-        post.rating = args["rating"]
-        post.rating_int = args["rating_int"]
-        post.content_before = args["content_before"]
-        post.content_after = args["content_after"]
-        db.session.commit()
-        return Post.serializing(post), 201
+    # def put(self, post_id):
+    #     args = post_put_args.parse_args()
+    #     post = Post.query.filter_by(id=post_id).first()
+    #     post.title = args["title"]
+    #     post.author_name = args["author_name"]
+    #     post.rating = args["rating"]
+    #     post.rating_int = args["rating_int"]
+    #     post.content_before = args["content_before"]
+    #     post.content_after = args["content_after"]
+    #     db.session.commit()
+    #     return Post.serializing(post), 201
 
 api.add_resource(Post_, "/post/<int:post_id>")
 
@@ -77,27 +97,44 @@ def new_comment(post_id):
     else:
         return "Access denied."
 
-comment_put_args = reqparse.RequestParser(bundle_errors=True)
-comment_put_args.add_argument("title", type=str, help="Title of the comment", required=True)
-comment_put_args.add_argument("content", type=str, help="Content", required=True)
+# comment_put_args = reqparse.RequestParser(bundle_errors=True)
+# comment_put_args.add_argument("title", type=str, help="Title of the comment", required=True)
+# comment_put_args.add_argument("content", type=str, help="Content", required=True)
 
-class Comment_(Resource):
-    def get(self, comment_id):
-        response = json.dumps(Comment.serializing(Comment.query.filter_by(id=comment_id).first()))
-        comment_details = json.loads(response)
-        title = comment_details["title"]
-        comment = comment_details["content"]
-        return make_response(render_template("viewcomment.html", title=title, comment=comment))
+# class Comment_(Resource):
+#     def get(self, comment_id):
+#         comment_details = Comment.serializing(Comment.query.filter_by(id=comment_id).first())
+#         title = comment_details["title"]
+#         comment = comment_details["content"]
+#         return make_response(render_template("viewcomment.html", title=title, comment=comment))
 
-    def post(self, comment_id):
-        args = comment_put_args.parse_args()
-        comment = Comment.query.filter_by(id=comment_id).first()
-        comment.title = args["title"]
-        comment.content = args["content"]
-        db.session.commit()
-        return Comment.serializing(comment), 201
+    # def post(self, comment_id):
+    #     args = comment_put_args.parse_args()
+    #     comment = Comment.query.filter_by(id=comment_id).first()
+    #     comment.title = args["title"]
+    #     comment.content = args["content"]
+    #     db.session.commit()
+    #     return Comment.serializing(comment), 201
 
-api.add_resource(Comment_, "/comment/<int:comment_id>")
+# api.add_resource(Comment_, "/comment/<int:comment_id>")
+
+# class AllComments(Resource):
+#     def get(self, post_id):
+#         comment_list = []
+#         comments = Comment.query.filter_by(comment_url=post_id)
+#         for comment in comments:
+#             comment_details = Comment.serializing(comment)
+#             user_id = comment_details['user_id']
+#             user = User.serializing(User.query.get_or_404(user_id))
+#             comment_details["author"] = user["username"]
+#             comment_details["image_file"] = user['image_file']
+#             time = comment_details["date_posted"].strftime('%m-%d-%Y')
+#             comment_details["date_posted"] = time
+#             comment_list.append(comment_details)
+#         return jsonify(comment_list)
+
+# api.add_resource(AllComments, "/api/<post_id>/comment")
+# WHEN have time to make auth headers
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
@@ -124,18 +161,20 @@ def contact():
 
 @app.route('/books')
 def books():
+    url = BASE + "api/post"
+    response = requests.get(url, verify=False)
+    post_details = response.json()
     book_dict = {}
     author_more_books = []
-    posts = Post.query.all()
-    for post in posts:
+    for post in post_details:
         base_url = BASE
-        post_id = str(post.id)
+        post_id = str(post["id"])
         temp_url = base_url + 'post/' + post_id
-        image_file = url_for('static', filename='posts/' + post.image_file)
-        if post.author_name in book_dict:
-            book_dict[post.author_name].append([post.title, temp_url, image_file])
+        image_file = post["image_file"]
+        if post["author_name"] in book_dict:
+            book_dict[post["author_name"]].append([post["title"], temp_url, image_file])
         else:
-            book_dict[post.author_name] = [[post.title, temp_url, image_file]]
+            book_dict[post["author_name"]] = [[post['title'], temp_url, image_file]]
     for author in book_dict:
         if len(book_dict[author]) > 1:
             author_more_books.append(author)
@@ -231,6 +270,33 @@ def save_picture(form_picture):
     picture_path = os.path.join(app.root_path, 'static/posts', form_picture.filename)
     form_picture.save(picture_path)
     return form_picture.filename
+
+@app.route("/post/<int:post_id>/update", methods=['GET','POST'])
+@login_required
+def update_post(post_id):
+    form = PostForm()
+    if request.method == 'POST':
+        post_query = Post.query.get_or_404(post_id)
+        if form.title.data:
+            post_query.title = form.title.data
+        if form.author_name.data:
+            post_query.author_name = form.author_name.data
+        if form.rating.data:
+            post_query.rating = form.rating.data
+        if form.rating_int.data:
+            post_query.rating_int = form.rating_int.data
+        if form.content_before.data:
+            post_query.content_before = form.content_before.data
+        if form.content_after.data:
+            post_query.content_after = form.content_after.data
+        if form.image_file.data:
+            post_query.image_file = save_picture(form.image_file.data)
+        db.session.commit()
+        return(redirect("/"))
+    elif current_user.email == 'robertssun1234@gmail.com':
+        return render_template('updatepost.html', title='Update Post', form=form)
+    else:
+        return "Access denied."
 
 @app.route("/post/<int:post_id>/delete", methods=['GET','POST'])
 @login_required
