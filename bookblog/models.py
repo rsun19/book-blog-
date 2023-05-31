@@ -10,8 +10,14 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', backref='author', lazy = True)
     posts = db.relationship('Post', backref='author', lazy = True)
 
-    def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+    def serializing(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            "email": self.email,
+            "image_file": self.image_file,
+            "comments": self.comments
+        }
     
     def get_id(self):
         return str(self.id)
@@ -30,7 +36,8 @@ class Comment(db.Model):
             'title': self.title,
             "content": self.content,
             "comment_url": self.comment_url,
-            "user_id": self.user_id
+            "user_id": self.user_id,
+            "date_posted": self.date_posted
         }
 
 class Post(db.Model):
@@ -49,6 +56,7 @@ class Post(db.Model):
         return {
             'id': self.id,
             'title': self.title,
+            'image_file': self.image_file,
             'author_name': self.author_name,
             'rating': self.rating,
             "rating_int": self.rating_int,
