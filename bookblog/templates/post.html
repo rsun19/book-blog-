@@ -1,16 +1,16 @@
 {% extends 'template.html' %}
 {% block content %}
-    <h1 class="centered" style="font-size: 40px; font-weight: bold;">{{ book_title }}</h1>
+    <h1 class="centered" style="font-size: 40px; font-weight: bold;">{{ post.title }}</h1>
     <h2 class="centerednospace" style="font-size: 20px; font-weight: bold;">By:</h2>
-    <h1 class="centerednospace" style="font-size: 40px; font-weight: bold;">{{ author_name }}</h1>
-    <img style="max-height: 500px; width: auto; margin: 20px auto;" src="{{ image_file }}">
-    <h3 class="centerednospace" style="margin-bottom: 30px; font-weight: bold;">{{ rating }}</h3>
+    <h1 class="centerednospace" style="font-size: 40px; font-weight: bold;">{{ post.author_name }}</h1>
+    <img style="max-height: 500px; width: auto; margin: 20px auto;" src="{{ post.image_file }}">
+    <h3 class="centerednospace" style="margin-bottom: 30px; font-weight: bold;">{{ post.rating }}</h3>
     <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; margin-top: 0px; margin-bottom: 30px;">
         <div class="marginCardStyling">  
             <div class="w-full rounded overflow-hidden shadow-lg border">
-                <div style="padding: 40px;">
+                <div style="padding: 20px 40px 40px 40px;">
                     <p class="text-gray-700 text-base" style="margin-bottom: 20px; word-break: break-word; white-space: pre-line;">
-                        {{ content_before }}
+                        {{ post.content_before }}
                     </p>
                     <h2 class="centerednospace" style="font-weight: bold; font-size: 40; margin: auto;">WARNING: CONTAINS SPOILERS!</h2>
                     <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
@@ -20,7 +20,7 @@
                     </div>
                     <div id="spoilers">
                         <p class="text-gray-700 text-base" style="word-break: break-word; white-space: pre-line;">
-                            {{ content_after }}
+                            {{ post.content_after }}
                         </p>
                     </div>
                 </div>
