@@ -1,0 +1,38 @@
+{% extends 'template.html' %}
+{% block content %}
+    <div class="centered" style="background-color: gray;">
+        <h1>{{ title }}</h1>
+        <form action="" method="POST" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.title.label }}<br>
+                {{ form.title(size=32) }}
+            </p>
+            <p>
+                {{ form.author_name.label }}<br>
+                {{ form.author_name(size=32) }}
+            </p>
+            <p>
+                {{ form.rating.label }}<br>
+                {{ form.rating(size=32) }}
+            </p>
+            <p>
+                {{ form.rating_int.label }}<br>
+                {{ form.rating_int(size=32) }}
+            </p>
+            <p>
+                {{ form.content_before.label }}<br>
+                {{ form.content_before(cols="60", rows="15") }}
+            </p>
+            <p>
+                {{ form.content_after.label }}<br>
+                {{ form.content_after(cols="60", rows="15") }}
+            </p>
+            <p>
+                {{ form.image_file.label }}<br>
+                {{ form.image_file(size=60) }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+{% endblock %}
